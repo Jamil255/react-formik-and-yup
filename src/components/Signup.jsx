@@ -1,22 +1,24 @@
 import { useFormik } from 'formik'
 import React from 'react'
 import signupSchema from '../schema'
+
 const initialValues = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
 }
+
 const Signup = () => {
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({
       initialValues,
       validationSchema: signupSchema,
-      onSubmit: (value) => {
-        console.log(value)
+      onSubmit: (values, actions) => {
+        console.log(values)
+        actions.resetForm()
       },
     })
-  //   console.log(errors)
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -36,16 +38,15 @@ const Signup = () => {
               type="text"
               value={values.firstName}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              onBlur={handleBlur}
+              className={`w-full px-3 py-2 border ${
+                errors.firstName && touched.firstName
+                  ? 'border-red-500'
+                  : 'border-gray-300'
+              } rounded-lg focus:outline-none focus:border-blue-500`}
             />
             {touched.firstName && errors.firstName ? (
-              <p
-                style={{
-                  color: 'red',
-                }}
-              >
-                {errors.firstName}
-              </p>
+              <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
             ) : null}
           </div>
           <div className="mb-4">
@@ -58,19 +59,18 @@ const Signup = () => {
             <input
               id="lastName"
               name="lastName"
+              type="text"
               value={values.lastName}
               onChange={handleChange}
-              type="text"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              onBlur={handleBlur}
+              className={`w-full px-3 py-2 border ${
+                errors.lastName && touched.lastName
+                  ? 'border-red-500'
+                  : 'border-gray-300'
+              } rounded-lg focus:outline-none focus:border-blue-500`}
             />
             {touched.lastName && errors.lastName ? (
-              <p
-                style={{
-                  color: 'red',
-                }}
-              >
-                {errors.lastName}
-              </p>
+              <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
             ) : null}
           </div>
           <div className="mb-4">
@@ -86,16 +86,15 @@ const Signup = () => {
               type="email"
               value={values.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              onBlur={handleBlur}
+              className={`w-full px-3 py-2 border ${
+                errors.email && touched.email
+                  ? 'border-red-500'
+                  : 'border-gray-300'
+              } rounded-lg focus:outline-none focus:border-blue-500`}
             />
             {touched.email && errors.email ? (
-              <p
-                style={{
-                  color: 'red',
-                }}
-              >
-                {errors.email}
-              </p>
+              <p className="text-red-500 text-xs mt-1">{errors.email}</p>
             ) : null}
           </div>
           <div className="mb-6">
@@ -111,16 +110,15 @@ const Signup = () => {
               type="password"
               value={values.password}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+              onBlur={handleBlur}
+              className={`w-full px-3 py-2 border ${
+                errors.password && touched.password
+                  ? 'border-red-500'
+                  : 'border-gray-300'
+              } rounded-lg focus:outline-none focus:border-blue-500`}
             />
             {errors.password && touched.password ? (
-              <p
-                style={{
-                  color: 'red',
-                }}
-              >
-                {errors.password}
-              </p>
+              <p className="text-red-500 text-xs mt-1">{errors.password}</p>
             ) : null}
           </div>
           <div className="flex items-center justify-between">
