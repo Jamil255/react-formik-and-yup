@@ -1,5 +1,13 @@
+import Signup from './components/Signup'
+
 function App() {
-  return <></>
+  return (
+    <>
+      <div>
+        <Signup />
+      </div>
+    </>
+  )
 }
 
 export default App
